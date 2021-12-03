@@ -1,0 +1,47 @@
+
+<!-- Criteo 홈페이지 태그 -->
+<script type="text/javascript">
+    window.criteo_q = window.criteo_q || [];
+    var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+    window.criteo_q.push(
+     { event: "setAccount", account: YOUR_PARTNER_ID},
+    
+     // To Do 1. 현재 유저의 이메일 주소(공백 제거 및 소문자로 변환 후). 유저의 이메일을 알수 없는 상황이면 빈 문자열로 전달
+     { event: "setEmail", email: "##User Email##", hash_method: "##Hash Method##" },
+    
+     // To Do 2. 현재 유저의 저장된 배송지 우편번호. 유저의 배송지 우편번호를 알수 없는 상황이면 빈 문자열로 전달
+     { event: "setZipcode", zipcode: "##Zip Code##" },
+    
+     { event: "setSiteType", type: deviceType},
+     { event: "viewHome"});
+    </script> 
+    <!-- END Criteo 홈페이지 태그 -->
+
+
+
+    <!-- 예제 -->
+    <!-- Criteo 홈페이지 태그 -->
+<script type="text/javascript">
+    window.criteo_q = window.criteo_q || [];
+    var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+    window.criteo_q.push(
+     { event: "setAccount", account: YOUR_PARTNER_ID},
+     { event: "setEmail", email: "46a828eb4c5d239d631a15094c934cada1812d5fc22cd14155ca684832a70938", hash_method: "sha256" },
+     { event: "setZipcode", zipcode: "12345" },
+     { event: "setSiteType", type: deviceType},
+     { event: "viewHome"});
+    </script>
+    <!-- END Criteo 홈페이지 태그 -->
+
+
+    
+--------------------------------------------------1회독-----------------------
+<script type="text/javascript">
+    window.criteo_q = window.criteo_q || [];
+    var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+    window.criteo_q.push(
+        { event : "setAccount", account: YOUR_PARTNER_ID},
+        { event : "setEmail", email: "489359043590345280sdgfdskjlgjdklgfdsjslfdjg9403930430040334", hash_method: "shoa32"},
+        { event : "setZipcode", zipcode: "2133245" },
+        { event : "viewHome"});
+</script>
