@@ -42,7 +42,7 @@ include('header.php');
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            수정 중 에러발생
+                            회원을 등록 중 입니다.
                         </h1>
 
                     </div>
@@ -53,26 +53,56 @@ include('header.php');
                 <div class="col-lg-12">
 
 
-    <?php
-    $fname = $_POST['firstname'];
-    $lname = $_POST['lastname'];
-    $mname = $_POST['Middlename'];
-    $address = $_POST['Address'];
-    $contct = $_POST['Contact'];
-    $comment = $_POST['comment'];
-    
-    switch ($_POST['action']) {
-        
-        case 'add':
-            $query = "INSERT INTO people
-                (first_name, last_name, mid_name, address, contact, comment)
-                VALUES ('" . $fname . "','" . $lname . "','" . $mname . "','" . $address . "','" . $contct . "','" . $comment . "')";
-            echo $query;  
-            mysqli_query($db, $query) or die('에러입니다');
-        break;
-    }
-    ?>
+                <?php
 
+
+// $file = $_FILES['file']['name'];
+// json_encode($file);
+// echo "<script>console.log( 'file: " . $file . "' );</script>";
+
+
+// $filename = $_FILES['file']['name'];
+// $filecounts = count($filename);
+// for($i=0; $i < $filecounts; $i++){
+//     move_uploaded_file($_FILES['file']['tmp_name'][$i], $filepath); 
+    
+// }
+ 
+
+
+$filepath = "uploads/"; //업로드 경로 
+$file = $_FILES['file']['name'];
+json_encode($file);
+$countfiles = count($_FILES['file']['name']); 
+$filearray = array();
+
+for($i=0;$i<$countfiles;$i++){
+    $filename = $file[$i];
+    array_push($filearray, $filename);
+    move_uploaded_file($_FILES['file']['tmp_name'][$i], $filepath.$filename);
+    echo "<script>console.log( 'for문 filename[i]: " . $filename . "' );</script>"; // 1.png 2.png
+ }
+ //echo "<script>console.log( 'for문 밖 filename: " . $filename . "' );</script>"; // 1.png
+ //echo "<script>console.log( 'for문 밖 filearray: " . $filearray . "' );</script>"; // Array
+
+
+$fname = $_POST['firstname'];
+$lname = $_POST['lastname'];
+$mname = $_POST['Middlename'];
+$address = $_POST['Address'];
+$contct = $_POST['Contact'];
+$comment = $_POST['comment'];
+switch ($_POST['action']) {
+
+    case 'add':
+        $query = "INSERT INTO people
+            (first_name, last_name, mid_name, address, contact, comment, file)
+            VALUES ('" . $fname . "','" . $lname . "','" . $mname . "','" . $address . "','" . $contct . "','" . $comment . "','" . json_encode($filearray) . "')";
+        echo $query;  
+        mysqli_query($db, $query) or die('에러입니다');
+        break;
+}
+?>
 
     <script type="text/javascript">
         alert("새로운 회원이 등록되었습니다.");

@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+
 			$zz = $_POST['id'];
 			$fname = $_POST['firstname'];
 		    $lname = $_POST['lastname'];
@@ -13,14 +14,15 @@
 			$address = $_POST['Address'];
 			$contct = $_POST['Contact'];
 			$comment = $_POST['comment'];
-			
+			$file = $_FILES['file']['name'];
+
 	   include('connection.php');
-		
-	 			$query = 'UPDATE people set first_name ="'.$fname.'",
+
+	 			$query = ' UPDATE people SET first_name ="'.$fname.'",
 					last_name ="'.$lname.'", mid_name="'.$mname.'",
-					address="'.$address.'",contact='.$contct.', 
-					comment="'.$comment.'" WHERE
-					people_id ="'.$zz.'"';
+					address="'.$address.'",contact="'.$contct.'", 
+					comment="'.$comment.'", file='. json_encode($file) .'  WHERE
+					people_id ="'.$zz.'" ';
 					$result = mysqli_query($db, $query) or die(mysqli_error($db));
 							
 ?>	

@@ -61,12 +61,17 @@
                                         <th>주소</th>
                                         <th>연락처</th>
                                         <th>소개</th>
+                                        <th>파일명</th>
                                         <th>회원관리</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-
+<!-- 
+mysqli_fetch_row($result)    는 $row[0] 과 같이 배열의 번호로 요소를 출력할 수 있다.
+mysqli_fetch_assoc($result)  의 assoc은 연관배열associative array 의 약자로, $row['log_num'] 와 같이 열이름안에 키값을 통해 데이터를 호출할 수 있다.
+mysqli_fetch_array($result)  는 두 방식 모두 사용할 수 있다. 즉 키값과 번호 중 아무 것이나 사용해도 무방하다. 
+ -->
             <?php                  
                 $query = 'SELECT * FROM people';
                 $result = mysqli_query($db, $query) or die (mysqli_error($db));
@@ -80,11 +85,14 @@
                     echo '<td>'. $row['address'].'</td>';
                     echo '<td>'. $row['contact'].'</td>';
                     echo '<td>'. $row['comment'].'</td>';
+                    echo '<td>'. $row['file'].'</td>';
+
                     echo '<td> <a type="button" class="btn btn-xs btn-info" href="searchfrm.php?action=edit & id='.$row['people_id'] . '" > 자세히 보기 </a> ';
                     echo ' <a  type="button" class="btn btn-xs btn-warning" href="edit.php?action=edit & id='.$row['people_id'] . '"> 수정하기 </a> ';
                     echo ' <a  type="button" class="btn btn-xs btn-danger" href="del.php?type=people&delete & id=' . $row['people_id'] . '">삭제하기 </a> </td>';
                     echo '</tr> ';
-                }
+        }
+                
             ?> 
                                     
                                 </tbody>
