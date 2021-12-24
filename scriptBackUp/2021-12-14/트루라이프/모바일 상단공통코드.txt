@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="{{$이미지경로}}/../swiper.min.css">
+<script src="{{$이미지경로}}/../swiper.min.js"></script>
+
+
+<!-- crema.me / 로그인 회원 정보 / 스크립트를 수정할 경우 연락주세요 (support@crema.me) -->
+<i id="crema-login-username" style="display:none;">{{$회원아이디}}</i>
+<i id="crema-login-name" style="display:none;">{{$회원명}}</i>
+<div id="wrap">
+	<!-- 카테고리&게시판 -->
+	<nav id="side_category" class="side_nav side_nav1">
+		<div class="area_scroll">
+			<div class="side_tab">
+				<ul>
+					<li class="selected" onclick="sideTab('category',this)">카테고리</li>
+					<li onclick="sideTab('community',this)">커뮤니티</li>
+				</ul>
+				<span class="btn_close" onclick="sideTgg(1); return false;"><em class="blind">닫기</em></span>
+			</div>
+			<div class="side_cnt category">
+				<dl class="list">
+					<dt><a href="/shop/big_section.php?cno1=1001">정기배송 식단</a></dt>
+					<dd><a href="/shop/big_section.php?cno1=1001">건강 식단</a></dd>
+					<dd><a href="/shop/big_section.php?cno1=1057">간편 식단</a></dd>
+					<dd><a href="/shop/big_section.php?cno1=1058">식단 기획전</a></dd>
+				</dl>
+				<dl class="list">
+					<dt><a href="/shop/big_section.php?cno1=1060">정기배송 샐러드</a></dt>
+					<dd><a href="/shop/big_section.php?cno1=1061">샐러드 식단</a></dd>
+					<dd><a href="/shop/big_section.php?cno1=1062">샐러드 기획전</a></dd>
+				</dl>
+				<dl class="list">
+					<dt><a href="/shop/big_section.php?cno1=1002">호밀 마켓</a></dt>
+					<!-- {{$사용자리스트103}} -->
+					<dd><a href="/shop/big_section.php?cno1=1002">건강 간식</a></dd>
+					<dd><a href="/shop/big_section.php?cno1=1024">건강 주스</a></dd>
+					<dd><a href="/shop/big_section.php?cno1=1049">호밀키트</a></dd>
+				</dl>
+			</div>
+			<div class="side_cnt community">
+				<dl class="list">
+					<dt><a href="/board/?db=gallery_1">이벤트/공지</a></dt>
+					<dd><a href="/board/?db=gallery_1">이벤트</a></dd>
+					<dd><a href="/board/?db=basic_1">공지</a></dd>
+					<dd><a href="/board/?db=basic_2">자주하는질문</a></dd>
+					<dd><a href="/shop/product_review_list.php">호밀 리뷰</a></dd>
+				</dl>
+				<dl class="list">
+					<dt><a href="/content/content.php?cont=about_m">호밀식단 이야기</a></dt>
+					<dd><a href="/content/content.php?cont=about_m">호밀 소개</a></dd>
+					<dd><a href="/content/content.php?cont=guide">호밀 이용방법</a></dd>
+				</dl>
+			</div>
+			<div class="bnr">
+				<div class="row">{{$사용자배너41}}</div>
+				<div class="col">{{$사용자배너42}}</div>
+				<div class="col">{{$사용자배너43}}</div>
+			</div>
+		</div>
+	</nav>
+	<!-- //카테고리&게시판 -->
+	<!-- 마이페이지 -->
+	<nav id="side_mypage" class="side_nav side_nav2">
+		<div class="area_scroll">
+			<div class="member">
+				{{$로그인전1}}
+				{{$로그인후1}}
+			</div>
+			<div class="bnr">
+				<div class="row">{{$사용자배너44}}</div>
+			</div>
+			<ul class="list">
+				<li><a href="/mypage/order_list.php">주문목록/배송조회</a></li>
+				<li><a href="/mypage/sccoupon.php">소셜쿠폰</a></li>
+				<li><a href="/mypage/coupon_down_list.php">쿠폰</a></li>
+				<li><a href="/mypage/milage.php">적립금</a></li>
+				<li><a href="/mypage/emoney.php">예치금</a></li>
+				<li><a href="/mypage/wish_list.php">관심 상품</a></li>
+				<li><a href="/mypage/counsel_list.php">1:1 문의</a></li>
+				<!-- <li><a href="/mypage/review_list.php">내 상품평</a></li> -->
+				<li><a href="/member/edit_step1.php">나의 정보수정</a></li>
+			</ul>
+		</div>
+		<div class="dimmed" onclick="sideTgg(2);"></div>
+	</nav>
+	<!-- //마이페이지 -->
+	<!-- 레이아웃 -->
+	<div id="layout">
+		{{if(사용자배너40)}}
+		<div id="top_bnr">
+			{{$사용자배너40}}
+			<span class="close" onclick="topBnr('close');"><em class="blind">닫기</em></span>
+		</div>
+		{{end(사용자배너40)}}
+		<!-- 상단 -->
+		<header id="header">
+			<div class="hgroup">
+				<h1 class="logo"><a href="{{$사이트주소}}"><img src="{{$이미지경로}}/logo/logo.png" alt="{{$쇼핑몰명}}"></a></h1>
+				<div class="gnb">
+					<span class="category"><a href="#" onclick="sideTgg(1); return false;"><em class="blind">카테고리</em></a></span>
+					<span class="cart"><a href="/shop/cart.php"><em class="blind">장바구니</em><span class="front_cart_rows">{{$장바구니개수}}</span></a></span>
+					<span class="my"><a href="/member/login.php" onclick="sideTgg(2); return false;"><em class="blind">마이페이지</em></a></span>
+				</div>
+			</div>
+		</header>
+		<!-- //상단 -->
+		<!-- 페이지 타이틀 -->
+		<div class="sub_title_txt">
+			{{$사용자HTML105}} <!-- 서브 타이틀 텍스트(일반페이지) 사용자코드 -->
+			{{$사용자HTML106}} <!-- 서브 타이틀 텍스트(카테고리) 사용자코드 -->
+			<div class="btn_back" onclick="history.back();"><em class="blind">뒤로</em></div>
+		</div>
+		<!-- //페이지 타이틀 -->
+
+		<!-- 중앙 -->
+		<div id="cnt">
+			<!-- lnb 스와이프 메뉴(고객센터) 사용자코드 -->
+			{{$사용자HTML101}}
+			<!-- //lnb 스와이프 메뉴(고객센터) 사용자코드 -->
+			<!-- lnb 스와이프 메뉴(고객센터) 사용자코드 -->
+			{{$사용자HTML120}}
+			<!-- //lnb 스와이프 메뉴(고객센터) 사용자코드 -->

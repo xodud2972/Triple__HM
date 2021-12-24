@@ -1,0 +1,11 @@
+<div id="join_finish" class="box_common">
+	<h3>{{$회원명}} 고객님<br>{{$쇼핑몰명}} 회원가입을 진심으로 환영합니다.</h3>
+	<p class="msg">고객님의 만족과 감동을 위하여 항상 최선을 다하겠습니다.<br>감사합니다.</p>
+	<div class="box_btn block"><a href="{{$사이트주소}}">메인으로</a></div>
+</div>
+
+<!-- 카카오모몬트픽셀, 키워드픽셀 회원가입 2021.12.14 TripleHM -->
+<script type="text/javascript">
+      kakaoPixel('7033828375881860609').completeRegistration('2');
+      kakaoPixel('2186608131752282054').completeRegistration('3');
+</script>

@@ -1,36 +1,54 @@
-
+<!-- 
+	User Insert Process
+    Create by Taeyoung 2021-12-23
+-->
 <?php
-include_once('../db/db.php');    
+function userInsert(){
+    include_once('../db/db.php');
+    $db = db_open();    
 
-$fname = $_POST['firstname'];
-$lname = $_POST['lastname'];
-$mname = $_POST['Middlename'];
-$ads = $_POST['Address'];
-$ctt = $_POST['Contact'];
-$cmt = $_POST['comment'];
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
+    $midName = $_POST['Middlename'];
+    $ads = $_POST['Address'];
+    $ctt = $_POST['Contact'];
+    $cmt = $_POST['comment'];
+    $fileName = $_FILES['files']['name'];
+    $FILE_COUNT = count($fileName);
+    $filePath = "../uploads";
 
 
-$filename = $_FILES['files']['name'];
-$filename2 = $_FILES['files2']['name'];
-$count = count($filename);
-$filepath = "../uploads";
+    $queryInsertUser = sprintf(
+    "INSERT INTO t_people
+        (first_name, last_name, mid_name, address, contact, comment)
+    VALUES 
+        ('%s','%s','%s','%s','%s','%s')"
+    ,$firstName, $lastName, $midName, $ads, $ctt, $cmt);
 
-for($i=0; $i<$count; $i++){
-    $tmp_name = $_FILES["files"]["tmp_name"][$i];
-    $tmp_name2 = $_FILES["files2"]["tmp_name"][$i];
-    $name = basename($_FILES["files"]["name"][$i]);
-    $name2 = basename($_FILES["files2"]["name"][$i]);
-    move_uploaded_file($tmp_name, "$filepath/$name");
-    move_uploaded_file($tmp_name2, "$filepath/$name2");
+    que($db, $queryInsertUser);
+
+    $querySelectLastId = "SELECT LAST_INSERT_ID() as lastId";
+    $exceSelectLastId = que($db, $querySelectLastId);
+    $lastId = mysqli_fetch_array($exceSelectLastId);
+
+if($fileName[0] != ""){
+    for($Fileindex=0; $Fileindex <$FILE_COUNT; $Fileindex++){
+        $tmp_Name = $_FILES["files"]["tmp_name"][$Fileindex];
+        $name = basename($fileName[$Fileindex]);
+        move_uploaded_file($tmp_Name, "$filePath/$name");
+   
+        $queryInsertFiles = sprintf(
+            "INSERT INTO t_file
+                (file_people_id, filename)
+            VALUES
+                ('%s', '%s')"
+            ,$lastId['lastId'] ,$fileName[$Fileindex]);
+        
+        que($db, $queryInsertFiles);
+
+        echo $queryInsertFiles;
+
+    }
 }
-    $query = "INSERT INTO people
-            (first_name, last_name, mid_name, address, contact, comment, file, file2)
-            VALUES ('" . $fname . "','" . $lname . "','" . $mname . "','" . $ads . "','" . $ctt . "','" . $cmt . "', '$filename[0]', '$filename2[0]')";
-    mysqli_query($conn, $query) or die(mysqli_error($conn));
-
+}
 ?>
-
-
-
-
-

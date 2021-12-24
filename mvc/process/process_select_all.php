@@ -1,33 +1,55 @@
+<!-- 
+	Index Page Process + Pagination Code
+    Create by Taeyoung 2021-12-23
+-->
 <?php
-include('../db/db.php');
-$query = 'SELECT people_id, first_name, last_name, mid_name, address, contact, comment, file, file2 FROM people';
-$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-while ($row = mysqli_fetch_array($result)) {
-	echo '<tr>';
-	echo '<td>' . $row['first_name'] . '</td>';
-	echo '<td>' . $row['last_name'] . '</td>';
-	echo '<td>' . $row['mid_name'] . '</td>';
-	echo '<td>' . $row['address'] . '</td>';
-	echo '<td>' . $row['contact'] . '</td>';
-	echo '<td>' . $row['comment'] . '</td>';
-	echo '<td><a href="../uploads/' . $row['file'] . '" download>' . $row['file'] . '</a></td>';
-	echo '<td><a href="../uploads/' . $row['file2'] . '" download>' . $row['file2'] . '</a></td>';
-	echo '<td><a class="btn btn-xs btn-info" type="button" href="../view/select.php?&id=' . $row['people_id'] . '" > 자세히 보기 </a>  ,';
-	echo '<a class="btn btn-xs btn-warning" type="button" href="../view/edit.php?&id=' . $row['people_id'] . '"> 수정하기 </a>   ,';
-	echo '<a class="btn btn-xs btn-danger" type="button" href="../process/process_del.php?&id=' . $row['people_id'] . '" onclick="button_event(); clkBtn();">삭제하기</a> </td>';
-	echo '</tr>';
+include_once('../db/db.php');
+
+function SelectAllUser(){
+	$db = db_open();
+
+	if (isset($_GET["page"])) {
+		$page = $_GET["page"];
+	} else {
+		$page = 1; 
+	}
+                   
+	$list = 10;                                                   
+	$page_start = ($page - 1) * $list;  
+
+
+	$querySelectAllUser = sprintf('SELECT people_id, first_name, last_name, mid_name, address, contact, comment,  COUNT(filename)  AS filename
+						FROM t_people
+							LEFT JOIN t_file
+						ON t_people.people_id = t_file.file_people_id
+							GROUP BY t_people.people_id
+						ORDER BY people_id 
+							DESC LIMIT %s, %s ',
+						$page_start, $list);
+
+
+	$result = que($db, $querySelectAllUser);
+
+	while ($row = mysqli_fetch_array($result)) {
+		$tempData["firstName"] = $row['first_name'];
+		$tempData["lastName"] = $row['last_name'];
+		$tempData["midName"] = $row['mid_name'];
+		$tempData["add"] = $row['address'];
+		$tempData["ctt"] = $row['contact'];
+		$tempData["cmt"] = $row['comment'];
+		$tempData["id"] = $row['people_id'];
+		$tempData["filename"] = $row['filename'];
+
+		$resultData[] = $tempData;
+	}
+
+	return $resultData;
 }
 ?>
+
 <script>
-	function button_event() {
-		if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-			document.form.submit();
-		} else { //취소
-			return;
-		}
-	}
+	//AJAX
 	function clkBtn() {
-		// Get form
 		var form = $('#form1')[0];
 		var data = new FormData(form);
 		$.ajax({
@@ -42,6 +64,7 @@ while ($row = mysqli_fetch_array($result)) {
 			success: function(data) {
 				// 전송 후 성공 시 실행 코드
 				console.log(data);
+				location.href = '../mvc/view/index.php';
 			},
 			error: function(e) {
 				// 전송 후 에러 발생 시 실행 코드

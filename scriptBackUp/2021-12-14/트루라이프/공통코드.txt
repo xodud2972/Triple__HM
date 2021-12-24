@@ -1,0 +1,221 @@
+<!-- 슬라이드 스크립트 (삭제하시면 슬라이드가 구현되지 않습니다) -->
+<script src="{{$이미지경로}}/../jquery.cycle.all.js"></script>
+
+
+
+<!-- crema.me / 로그인 회원 정보 / 스크립트를 수정할 경우 연락주세요 (support@crema.me) -->
+<i id="crema-login-username" style="display:none;">{{$회원아이디}}</i>
+<i id="crema-login-name" style="display:none;">{{$회원명}}</i>
+<div id="wrapper">
+	<!-- 상단 -->
+	<div id="header">
+		<div class="hgroup_box">
+			<div class="hgroup">
+				<div class="wrap_inner">
+					<div class="top_img"><a href="/content/content.php?cont=delivery"><img src="{{$이미지경로}}/common/top_img.gif" alt=""></a></div>
+					<ul class="gnb">
+						{{$로그인전1}}{{$로그인후1}}
+						<li class="my_group">
+							<a href="/content/content.php?cont=my_diet">마이호밀<span class="arr"></span></a>
+							<div class="member">
+								{{if(로그인후1)}}
+								<div class="my_info">
+									<p class="msg">{{$회원명}}님<br>반갑습니다.</p>
+									<span class="lv">{{$회원등급}}</span>
+								</div>
+								{{end(로그인후1)}}
+								<ul class="my_menu">
+									<li><a href="/mypage/order_list.php">주문내역조회</a></li>
+									<li><a href="/content/content.php?cont=my_diet">나의식단달력</a></li>
+									<li><a href="/mypage/counsel_list.php">1:1 문의</a></li>
+									<li><a href="/mypage/wish_list.php">위시리스트</a></li>
+									<li><a href="/shop/product_review_list.php">상품후기</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="/content/content.php?cont=customer">고객센터</a></li>
+					</ul>
+					<div class="btn_all_cate" onclick="allCate();"><span class="blind">전체메뉴</span></div>
+					<h1 class="logo"><a href="{{$사이트주소}}"><img src="{{$이미지경로}}/logo/logo.png" alt="{{$사이트명}}"></a></h1>
+					<ul class="lnb">
+						<!-- 
+						<li><a href="/shop/big_section.php?cno1=1001"><span class="icon sub"></span>호밀 식단</a></li>
+						<li><a href="/shop/big_section.php?cno1=1049"><span class="icon kit"></span>호밀키트</a></li>
+						<li><a href="/shop/big_section.php?cno1=1002"><span class="icon market"></span>건강 간식</a></li>
+						onmouseover="cateHover('child3')" onmouseout="cateOut()"
+						-->
+						<li><a href="/shop/big_section.php?cno1=1001" onmouseover="cateHover()"><span class="icon sub"></span>정기배송 식단</a></li>
+						<li><a href="/shop/big_section.php?cno1=1060" onmouseover="cateHover()"><span class="icon kit"></span>정기배송 샐러드</a></li>
+						<li><a href="/shop/big_section.php?cno1=1002" onmouseover="cateHover()"><span class="icon market"></span>호밀 마켓</a></li>
+						<li><a href="/board/?db=gallery_1" onmouseover="cateHover()"><span class="icon market"></span>이벤트/공지</a></li>
+						<li class="last"><a href="/content/content.php?cont=about" onmouseover="cateHover()"><span class="icon market"></span>호밀 이야기</a></li>
+					</ul>
+					<ul class="util">
+						<li class="cart"><a href="/shop/cart.php"><span class="blind">장바구니</span><span class="ea_cart quick_cart_cnt">{{$장바구니개수}}</span></a></li>
+						<li class="mypage"><a href="/content/content.php?cont=my_diet"><span class="blind">Mypage</span></a>
+					</ul>
+					<div class="top_search" id="top_search">
+						{{$상품검색폼시작}}
+						<div class="inputbox">
+							<input type="text" name="search_str" value="" class="input">
+							<span class="search_close"><span class="blind">검색 닫기</span></span>
+						</div>
+						<div class="search_run" onclick="topSearch();"><span class="blind">검색</span></div>
+						{{$상품검색폼끝}}
+					</div>
+				</div>
+				<div class="all_cate2" id="all_cate2" onmouseover="cateHover()" onmouseout="cateOut()">
+					<div class="wrap_inner">
+						<!-- 배너 슬라이드 -->
+						<!-- <div id="all_cate_bnr" class="bnr">
+							<ul class="slides_container">
+								{{if(사용자배너21)}}<li>{{$사용자배너21}}</li>{{end(사용자배너21)}}
+								{{if(사용자배너22)}}<li>{{$사용자배너22}}</li>{{end(사용자배너22)}}
+								{{if(사용자배너23)}}<li>{{$사용자배너23}}</li>{{end(사용자배너23)}}
+								{{if(사용자배너24)}}<li>{{$사용자배너24}}</li>{{end(사용자배너24)}}
+								{{if(사용자배너25)}}<li>{{$사용자배너25}}</li>{{end(사용자배너25)}}
+							</ul>
+							<ul class="pagination">
+							</ul>
+						</div> -->
+						<!-- //배너 슬라이드 -->
+						<div class="col_box">
+							<div class="col child0">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1001">정기배송 식단</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1001">건강 식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1057">간편 식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1058">식단 기획전</a></dd>
+								</dl>
+							</div>
+							<div class="col child1">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1060">정기배송 샐러드</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1061">샐러드 식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1062">샐러드 기획전</a></dd>
+								</dl>
+							</div>
+							<div class="col child2">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1002">호밀 마켓</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1002">건강 간식</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1024">건강 주스</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1049">호밀키트</a></dd>
+		
+								</dl>
+							</div>
+							<div class="col child3">
+								<dl>
+									<dt><a href="/board/?db=gallery_1">이벤트/공지</a></dt>
+									<dd><a href="/board/?db=gallery_1">이벤트</a></dd>
+									<dd><a href="/board/?db=basic_1">공지</a></dd>
+									<dd><a href="/board/?db=basic_2">자주하는질문</a></dd>
+									<dd><a href="/shop/product_review_list.php">호밀 리뷰</a></dd>
+								</dl>
+							</div>
+							<div class="col child4">
+								<dl>
+									<dt><a href="/content/content.php?cont=about">호밀 이야기</a></dt>
+									<dd><a href="/content/content.php?cont=about">호밀 소개</a></dd>
+									<dd><a href="/content/content.php?cont=guide">호밀 이용방법</a></dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="all_cate" id="all_cate" onmouseover="cateHover()" onmouseout="cateOut()">
+					<div class="wrap_inner">
+						<div class="col_box">
+							<div class="col child0">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1001">정기배송 식단</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1001">건강식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1057">간편식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1058">식단기획전</a></dd>
+								</dl>
+							</div>
+							<div class="col child1">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1060">정기배송 샐러드</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1061">샐러드 식단</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1062">샐러드 기획전</a></dd>
+								</dl>
+							</div>
+							<div class="col child2">
+								<dl>
+									<dt><a href="/shop/big_section.php?cno1=1002">호밀 마켓</a></dt>
+									<dd><a href="/shop/big_section.php?cno1=1002">건강 간식</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1024">건강 주스</a></dd>
+									<dd><a href="/shop/big_section.php?cno1=1049">호밀키트</a></dd>
+		
+								</dl>
+							</div>
+							<div class="col child3">
+								<dl>
+									<dt><a href="/board/?db=gallery_1">이벤트/공지</a></dt>
+									<dd><a href="/board/?db=gallery_1">이벤트</a></dd>
+									<dd><a href="/board/?db=basic_1">공지</a></dd>
+									<dd><a href="/board/?db=basic_2">자주하는질문</a></dd>
+									<dd><a href="/shop/product_review_list.php">호밀 리뷰</a></dd>
+								</dl>
+							</div>
+							<div class="col child4">
+								<dl>
+									<dt><a href="/content/content.php?cont=about">호밀 이야기</a></dt>
+									<dd><a href="/content/content.php?cont=about">호밀 소개</a></dd>
+									<dd><a href="/content/content.php?cont=guide">호밀 이용방법</a></dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!-- //상단-->
+	<!-- 우측퀵 -->
+	<div id="side_quick">
+		<div class="rail">
+			<div class="box menu">		
+				<figure class="logo">
+					<a href="{{$사이트경로}}/content/content.php?cont=haccp"><img src="{{$이미지경로}}/common/haccp_logo.gif" alt="안전관리인증 HACCP 로고"></a>
+					<figcaption class="txt">HACCP<br>안심제조</figcaption>
+				</figure>
+				<ul>
+					<li><a href="/content/content.php?cont=delivery">새벽 직배송 안내</a></li>
+					<li><a href="#" onclick="layerPop('popup_search'); return false;">직배송 가능지역</a></li>
+					<li><a href="/shop/big_section.php?cno1=1018">체험식단</a></li>
+					<li><a href="/content/content.php?cont=today_menu">오늘의 식단</a></li>
+					<li><a href="/content/content.php?cont=membership">멤버십서비스</a></li>
+					<li><a href="/board/?db=gallery_1">이벤트</a></li>
+					<li><a href="/shop/big_section.php?cno1=1034">개인결제창</a></li>
+				</ul>
+			</div>
+			<div class="box recent">
+				<h3>최근본상품 (<span class="point_color">{{$최근본상품개수}}</span>)</h3>
+				<div class="list">
+					{{$최근상품리스트}}
+				</div>
+				<div class="btn">
+					<a href="{{$최근상품스크롤상}}"><img src="{{$이미지경로}}/button/recent_up.gif" alt="위로"></a>
+					<a href="{{$최근상품스크롤하}}"><img src="{{$이미지경로}}/button/recent_down.gif" alt="위로"></a>
+				</div>
+			</div>
+			<div class="box scroll">
+				<a class="up btn_scroll_top"><span class="arr"></span>상단으로</a>
+				<a class="down btn_scroll_bottom"><span class="arr"></span>하단으로</a>
+			</div>
+		</div>
+	</div>
+	<!-- //우측퀵 -->
+	<!-- 중앙 -->
+	<div id="container" class="{{$사용자HTML6}}">
+		{{$사용자HTML1}} <!-- 서브 타이틀 이미지(카테고리) 사용자코드 -->
+		{{$사용자HTML20}} <!-- 서브 타이틀 (컨텐츠/메뉴) 사용자코드 -->
+		{{$사용자HTML5}} <!-- 서브 페이지 네비게이터 사용자코드 -->
+		{{$사용자HTML9}} <!-- 서브 타이틀 텍스트(일반페이지) 사용자코드 -->
+		{{$사용자HTML10}} <!-- 서브 타이틀 텍스트(카테고리) 사용자코드 -->
+		{{$사용자HTML2}} <!-- 마이페이지 좌측메뉴 사용자코드 -->
+		{{$사용자HTML7}} <!-- 고객센터 좌측메뉴 사용자코드 -->
+		<div id="cnt" class="wrap_inner">

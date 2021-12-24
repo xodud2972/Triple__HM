@@ -1,35 +1,38 @@
+<!-- 
+	User Delete Process
+    Create by Taeyoung 2021-12-23
+-->
 <?php
-include_once('../db/db.php');
 
-$sql = '
-	SELECT * FROM people WHERE people_id=' . $_GET['id'];
+	include_once('../db/db.php');
+	$db = db_open();
 
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
+	$id = $_GET['id'];
 
-$del_file = "../uploads/" . $row['file'];
-$del_file2 = "../uploads/" . $row['file2'];
+	$querySelectFiles = sprintf(
+		'SELECT filename FROM t_file WHERE file_people_id=%d',
+		$id
+	);
 
-if ($row['file'] && is_file($del_file)) {
-	unlink($del_file);
-}
-if ($row['file2'] && is_file($del_file2)) {
-	unlink($del_file2);
-}
+	$result = mysqli_query($db, $querySelectFiles);
 
-$sqldel = '
-	DELETE FROM people WHERE people_id=' . $_GET['id'];
-
-mysqli_query($conn, $sqldel) or die(mysqli_error($conn));
+	while ($row = mysqli_fetch_array($result)) {
+		$del_file = "../uploads/" . $row['filename'];
+		echo $del_file;
+		if ($row['filename'] && is_file($del_file)) {
+			unlink($del_file);
+		}
+	}
 
 
-$query = 'DELETE FROM people 
-	WHERE 
-		people_id = ' . $_GET['id'];
-$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+	$queryDeleteUser = sprintf(
+		'DELETE FROM t_people WHERE people_id=%d',
+		$id
+	);
+	que($db, $queryDeleteUser);
 
 ?>
 
 <script type="text/javascript">
-	window.location = "../view/index.php";
+ 	location.href = '../view/index.php';
 </script>
