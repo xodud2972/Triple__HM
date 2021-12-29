@@ -1,7 +1,9 @@
 <?php
 include('../db/db.php');
 include('../include/header.php');
+include('../process/process_select_one.php');
 ?>
+
 <body>
 
   <div id="wrapper">
@@ -33,10 +35,14 @@ include('../include/header.php');
           </div>
         </div>
         <div class="col-lg-12">
-          <h2 class="title_h2">회원정보 수정</h2>
+          <h2 class="title_h2">회원정보 삭제</h2>
           <div class="col-lg-6">
             <form id="form1" method="post" class="table_write">
-                <button id="delAjax" class="btn btn-default" type="button" onclick="BtnDel();">해당 파일 삭제하기</button>
+              <input type="hidden" value="del" name="action" class="validation-form">
+              <div class="form-group">
+                <input class="form-control" name="id" value="<?= $id ?>" type="hidden" />
+              </div>
+              <button id="delAjax" class="btn btn-default" type="button">삭제</button>
             </form>
             <a class="btn btn-default" type="button" href="../view/index.php"> 목록으로 돌아가기 </a>
           </div>
@@ -48,4 +54,39 @@ include('../include/header.php');
   <script src="../js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
+
+
+<script>
+  $("#delAjax").click(function() {
+
+    // AJAX
+    function BtnDel() {
+      var form = $('#form1')[0];
+      var data = new FormData(form);
+      $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: '../process/process_All.php', // form을 전송할 실제 파일경로
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function(data) {
+          // 전송 후 성공 시 실행 코드
+          console.log(data);
+          location = "../view/index.php";
+          alert('회원이 삭제되었습니다.');
+        },
+        error: function(e) {
+          // 전송 후 에러 발생 시 실행 코드
+          console.log("ERROR : ", e);
+        }
+      });
+    }
+
+    return BtnDel();
+  });
+</script>

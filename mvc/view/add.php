@@ -5,6 +5,7 @@
 <?php
 include('../include/header.php');
 ?>
+
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -39,17 +40,17 @@ include('../include/header.php');
                     <div class="col-lg-6">
                         <form id="form1" role="form" method="post" class="table_write">
                             <input type="hidden" value="add" name="action" class="validation-form">
-                            <div class="form-group"><input class="form-control" placeholder="이름 : ex) 길동"           name="firstname"    id="firstname"></div>
-                            <div class="form-group"><input class="form-control" placeholder="별명 : ex) 좀도둑"         name="lastname"     id="lastname"></div>
-                            <div class="form-group"><input class="form-control" placeholder="성 : ex) 홍"               name="Middlename"   id="Middlename"></div>
-                            <div class="form-group"><input class="form-control" placeholder="주소 : ex) 조선"           name="Address"      id="Address"></div>
-                            <div class="form-group"><input class="form-control" placeholder="연락처 : ex) 010-1234-5678" name="Contact"     id="Contact"></div>
+                            <div class="form-group"><input class="form-control" placeholder="이름 : ex) 길동" name="firstname" id="firstname"></div>
+                            <div class="form-group"><input class="form-control" placeholder="별명 : ex) 좀도둑" name="lastname" id="lastname"></div>
+                            <div class="form-group"><input class="form-control" placeholder="성 : ex) 홍" name="Middlename" id="Middlename"></div>
+                            <div class="form-group"><input class="form-control" placeholder="주소 : ex) 조선" name="Address" id="Address"></div>
+                            <div class="form-group"><input class="form-control" placeholder="연락처 : ex) 010-1234-5678" name="Contact" id="Contact"></div>
                             <div class="form-group">
                                 <label>소개</label>
                                 <textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
                             </div>
                             <div class="form-group" id="attachFileDiv">
-                                <input type="file" name="files[]" value="" size="40" multiple/>
+                                <input type="file" name="files[]" value="" size="40" multiple />
                             </div>
                             <button id="ajax" class="btn btn-default" type="button">전송</button>
                             <button class="btn btn-default" type="reset">초기화</button>
@@ -65,37 +66,11 @@ include('../include/header.php');
 </body>
 
 <script>
-  
- // AJAX
-function BtnInsert() {
-        var form = $('#form1')[0];
-        var data = new FormData(form);
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: '../process/process_All.php', 
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 600000,
-            success: function(data) {
-                console.log(data);
-                location="../view/index.php"
-            },
-            error: function(e) {
-                console.log("ERROR : ", e);
-            }
-        });
-    }
-
-
-
-/**
+    /**
     @return BtnInsert()
     create by 엄태영 2021.12.16
-**/   
-$("#ajax").click(function() {
+**/
+    $("#ajax").click(function() {
         if ($("#firstname").val().length == 0) {
             alert("이름을 입력하세요.");
             $("#firstname").focus();
@@ -126,8 +101,33 @@ $("#ajax").click(function() {
             $("#comment").focus();
             return false;
         } else {
+
+            // AJAX
+            function BtnInsert() {
+                var form = $('#form1')[0];
+                var data = new FormData(form);
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: '../process/process_All.php',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function(data) {
+                        console.log(data);
+                        location = "../view/index.php";
+                        alert('회원이 추가되었습니다.');
+                    },
+                    error: function(e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+            }
             return BtnInsert();
         }
     });
 </script>
+
 </html>

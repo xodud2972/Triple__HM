@@ -3,13 +3,13 @@
     Create by Taeyoung 2021-12-23
 -->
 <?php
-
+function userDelete(){
 	include_once('../db/db.php');
 	$db = db_open();
 
-	$id = $_GET['id'];
+	$id = $_POST['id'];
 
-	$querySelectFiles = sprintf(
+ 	$querySelectFiles = sprintf(
 		'SELECT filename FROM t_file WHERE file_people_id=%d',
 		$id
 	);
@@ -31,8 +31,9 @@
 	);
 	que($db, $queryDeleteUser);
 
-?>
 
-<script type="text/javascript">
- 	location.href = '../view/index.php';
-</script>
+	que_close($db);
+
+}
+
+?>

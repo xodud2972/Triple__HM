@@ -8,6 +8,7 @@ include_once('../db/db.php');
 $db = db_open();
 
 $id = $_POST['id'];
+
 $firstName = $_POST['firstname'];
 $lastName = $_POST['lastname'];
 $mid_Name = $_POST['Middlename'];
@@ -79,7 +80,11 @@ if ($fileName[0] != "") {
         );
 
         que($db, $queryInsertFiles);
+
     }
 }
+
+
+que_close($db);
 }
 ?>

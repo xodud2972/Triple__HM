@@ -50,5 +50,6 @@ if($fileName[0] != ""){
 
     }
 }
+que_close($db);
 }
 ?>
