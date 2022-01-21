@@ -6,7 +6,7 @@
 <?php
 include('../include/header.php');
 include('../process/process_select_all.php');
-$resultData = SelectAllUser();
+$resultData = selectAllUser();
 ?>
 
 <body>
@@ -66,7 +66,7 @@ $resultData = SelectAllUser();
                                         <td><?= $resultData[$index]["add"] ?></td>
                                         <td><?= $resultData[$index]["ctt"] ?></td>
                                         <td><?= $resultData[$index]["cmt"] ?></td>
-                                        <td><?= $resultData[$index]['filename'] ?> 개 </td>
+                                        <td><?= $resultData[$index]['fileName'] ?> 개 </td>
                                         <td>
                                             <a class="btn btn-xs btn-info" type="button" href="../view/select.php?action=select?&id=<?= $resultData[$index]['id'] ?>"> 자세히 보기 </a>
                                             <a class="btn btn-xs btn-warning" type="button" href="../view/edit.php?action=edit?&id=<?= $resultData[$index]['id'] ?>"> 수정하기 </a>
@@ -78,10 +78,9 @@ $resultData = SelectAllUser();
                                 ?>
                             </tbody>
                         </table>
-                        <!-- 하단 페이징 시작 -->
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                <?php pagenation(); ?>
+                                <?php pagination(); ?>
                             </ul>
                         </nav>
                     </div>
@@ -90,7 +89,7 @@ $resultData = SelectAllUser();
         </div>
     </div>
     </div>
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
 </body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </html>

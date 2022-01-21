@@ -52,41 +52,33 @@ include('../process/process_select_one.php');
   </div>
   <script src="../js/jquery.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-
 </body>
-
-</html>
-
-
 <script>
   $("#delAjax").click(function() {
-
-    // AJAX
-    function BtnDel() {
+    function btnDel() {
       var form = $('#form1')[0];
       var data = new FormData(form);
       $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: '../process/process_All.php', // form을 전송할 실제 파일경로
+        url: '../process/process_All.php', 
         data: data,
         processData: false,
         contentType: false,
-        cache: false,
         timeout: 600000,
         success: function(data) {
-          // 전송 후 성공 시 실행 코드
           console.log(data);
           location = "../view/index.php";
           alert('회원이 삭제되었습니다.');
         },
         error: function(e) {
-          // 전송 후 에러 발생 시 실행 코드
           console.log("ERROR : ", e);
         }
       });
     }
-
-    return BtnDel();
+    return btnDel();
   });
 </script>
+</html>
+
+

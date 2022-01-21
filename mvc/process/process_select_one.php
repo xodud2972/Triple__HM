@@ -25,7 +25,7 @@
 
     $firstName = $row['first_name'];
     $lastName = $row['last_name'];
-    $mid_Name = $row['mid_name'];
+    $midName = $row['mid_name'];
     $ads = $row['address'];
     $ctt = $row['contact'];
     $cmt = $row['comment'];
@@ -41,8 +41,8 @@
     $result2 = que($db, $querySelectOneUserFiles);
 
     while ($row2 = mysqli_fetch_array($result2)) {
-        $filename[] = $row2['filename'];
-        $file_id[] = $row2['file_id'];
+        $fileName[] = $row2['filename'];
+        $fileId[] = $row2['file_id'];
     }
     que_close($db);
 

@@ -1,7 +1,3 @@
-<!-- 
-    User Add Page.
-  create by 엄태영 2021.12.16
- -->
 <?php
 include('../include/header.php');
 ?>
@@ -40,14 +36,14 @@ include('../include/header.php');
                     <div class="col-lg-6">
                         <form id="form1" role="form" method="post" class="table_write">
                             <input type="hidden" value="add" name="action" class="validation-form">
-                            <div class="form-group"><input class="form-control" placeholder="이름 : ex) 길동" name="firstname" id="firstname"></div>
-                            <div class="form-group"><input class="form-control" placeholder="별명 : ex) 좀도둑" name="lastname" id="lastname"></div>
-                            <div class="form-group"><input class="form-control" placeholder="성 : ex) 홍" name="Middlename" id="Middlename"></div>
-                            <div class="form-group"><input class="form-control" placeholder="주소 : ex) 조선" name="Address" id="Address"></div>
-                            <div class="form-group"><input class="form-control" placeholder="연락처 : ex) 010-1234-5678" name="Contact" id="Contact"></div>
+                            <div class="form-group"><input class="form-control" placeholder="이름 : ex) 길동" name="firstName" id="firstName"></div>
+                            <div class="form-group"><input class="form-control" placeholder="별명 : ex) 좀도둑" name="lastName" id="lastName"></div>
+                            <div class="form-group"><input class="form-control" placeholder="성 : ex) 홍" name="midName" id="midName"></div>
+                            <div class="form-group"><input class="form-control" placeholder="주소 : ex) 조선" name="ads" id="ads"></div>
+                            <div class="form-group"><input class="form-control" placeholder="연락처 : ex) 010-1234-5678" name="ctt" id="ctt"></div>
                             <div class="form-group">
                                 <label>소개</label>
-                                <textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
+                                <textarea class="form-control" rows="3" name="cmt" id="cmt"></textarea>
                             </div>
                             <div class="form-group" id="attachFileDiv">
                                 <input type="file" name="files[]" value="" size="40" multiple />
@@ -66,68 +62,60 @@ include('../include/header.php');
 </body>
 
 <script>
-    /**
-    @return BtnInsert()
-    create by 엄태영 2021.12.16
-**/
     $("#ajax").click(function() {
-        if ($("#firstname").val().length == 0) {
+        if ($("#firstName").val().length == 0) {
             alert("이름을 입력하세요.");
-            $("#firstname").focus();
+            $("#firstName").focus();
             return false;
         }
-        if ($("#lastname").val().length == 0) {
+        if ($("#lastName").val().length == 0) {
             alert("별명을 입력하세요.");
-            $("#lastname").focus();
+            $("#lastName").focus();
             return false;
         }
-        if ($("#Middlename").val().length == 0) {
+        if ($("#midName").val().length == 0) {
             alert("성을 입력하세요.");
-            $("#Middlename").focus();
+            $("#midName").focus();
             return false;
         }
-        if ($("#Address").val().length == 0) {
+        if ($("#ads").val().length == 0) {
             alert("주소를 입력하세요.");
-            $("#Address").focus();
+            $("#ads").focus();
             return false;
         }
-        if ($("#Contact").val().length == 0) {
+        if ($("#ctt").val().length == 0) {
             alert("연락처를 입력하세요.");
-            $("#Contact").focus();
+            $("#ctt").focus();
             return false;
         }
-        if ($("#comment").val().length == 0) {
+        if ($("#cmt").val().length == 0) {
             alert("소개를 입력하세요.");
-            $("#comment").focus();
+            $("#cmt").focus();
             return false;
         } else {
-
-            // AJAX
-            function BtnInsert() {
+            function btnInsert() {
                 var form = $('#form1')[0];
                 var data = new FormData(form);
                 $.ajax({
-                    type: "POST",
+                    type: "POST",                               // 전송 타입 (get, post, put)
                     enctype: 'multipart/form-data',
-                    url: '../process/process_All.php',
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    timeout: 600000,
-                    success: function(data) {
+                    url: '../process/process_All.php',         
+                    data: data,                                 // 서버에 전송할 데이터 key/value형식의 객체
+                    processData: false,                         // 데이터를 querystring 형태로 보내지 않고 DOMDocument 또는 다른 형태로 보내고 싶으면 false로 설정한다.
+                    contentType: false,                         //해더의 Content-Type을 설정한다
+                    timeout: 1000,                              // 해당시간이 지나도 실패하면 에러 상태로 전환하게 된다.
+                    success: function(data) {                   //전송에 성공하면 실행될 코드
                         console.log(data);
                         location = "../view/index.php";
                         alert('회원이 추가되었습니다.');
                     },
-                    error: function(e) {
+                    error: function(e) {                        //전송에 실패하면 실행될 코드
                         console.log("ERROR : ", e);
                     }
                 });
             }
-            return BtnInsert();
+            return btnInsert();
         }
     });
 </script>
-
 </html>

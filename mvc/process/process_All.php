@@ -13,10 +13,10 @@ function userDelete(){
 	$result = mysqli_query($db, $querySelectFiles);
 
 	while ($row = mysqli_fetch_array($result)) {
-		$del_file = "../uploads/" . $row['filename'];
-		echo $del_file;
-		if ($row['filename'] && is_file($del_file)) {
-			unlink($del_file);
+		$del_File = "../uploads/" . $row['filename'];
+		echo $del_File;
+		if ($row['filename'] && is_file($del_File)) {
+			unlink($del_File);
 		}
 	}
 
@@ -38,15 +38,15 @@ function userEdit(){
     
     $id = $_POST['id'];
     
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $mid_Name = $_POST['Middlename'];
-    $ads = $_POST['Address'];
-    $ctt = $_POST['Contact'];
-    $cmt = $_POST['comment'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $midName = $_POST['midName'];
+    $ads = $_POST['ads'];
+    $ctt = $_POST['ctt'];
+    $cmt = $_POST['cmt'];
     
     $fileName = $_FILES['files']['name'];
-    $FILE_COUNT = count($fileName);
+    $fileCount = count($fileName);
     $filePath = "../uploads";
     
     $querySelectFiles = sprintf(
@@ -57,10 +57,10 @@ function userEdit(){
     $result = mysqli_query($db, $querySelectFiles);
     
     while ($row = mysqli_fetch_array($result)) {
-        $del_file = "../uploads/" . $row['filename'];
+        $del_File = "../uploads/" . $row['filename'];
         
-        if ($row['filename'] && is_file($del_file)) {
-            unlink($del_file);
+        if ($row['filename'] && is_file($del_File)) {
+            unlink($del_File);
         }
     }
     
@@ -78,7 +78,7 @@ function userEdit(){
             ('%s','%s','%s','%s','%s','%s')",
         $firstName,
         $lastName,
-        $mid_Name,
+        $midName,
         $ads,
         $ctt,
         $cmt
@@ -91,9 +91,9 @@ function userEdit(){
     $lastId = mysqli_fetch_array($exceSelectLastId);
     
     if ($fileName[0] != "") {
-        for ($Fileindex = 0; $Fileindex < $FILE_COUNT; $Fileindex++) {
-            $tmp_Name = $_FILES["files"]["tmp_name"][$Fileindex];
-            $name = basename($fileName[$Fileindex]);
+        for ($fileIndex = 0; $fileIndex < $fileCount; $fileIndex++) {
+            $tmp_Name = $_FILES["files"]["tmp_name"][$fileIndex];
+            $name = basename($fileName[$fileIndex]);
             move_uploaded_file($tmp_Name, "$filePath/$name");
     
             $queryInsertFiles = sprintf(
@@ -102,7 +102,7 @@ function userEdit(){
                 VALUES
                     ('%s', '%s')",
                 $lastId['lastId'],
-                $fileName[$Fileindex]
+                $fileName[$fileIndex]
             );
             que($db, $queryInsertFiles);
         }
@@ -114,14 +114,14 @@ function userInsert(){
     include_once('../db/db.php');
     $db = db_open();    
 
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $midName = $_POST['Middlename'];
-    $ads = $_POST['Address'];
-    $ctt = $_POST['Contact'];
-    $cmt = $_POST['comment'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $midName = $_POST['midName'];
+    $ads = $_POST['ads'];
+    $ctt = $_POST['ctt'];
+    $cmt = $_POST['cmt'];
     $fileName = $_FILES['files']['name'];
-    $FILE_COUNT = count($fileName);
+    $fileCount = count($fileName);
     $filePath = "../uploads";
 
     $queryInsertUser = sprintf(
@@ -138,9 +138,9 @@ function userInsert(){
     $lastId = mysqli_fetch_array($exceSelectLastId);
 
 if($fileName[0] != ""){
-    for($Fileindex=0; $Fileindex <$FILE_COUNT; $Fileindex++){
-        $tmp_Name = $_FILES["files"]["tmp_name"][$Fileindex];
-        $name = basename($fileName[$Fileindex]);
+    for($fileIndex=0; $fileIndex <$fileCount; $fileIndex++){
+        $tmp_Name = $_FILES["files"]["tmp_name"][$fileIndex];
+        $name = basename($fileName[$fileIndex]);
         move_uploaded_file($tmp_Name, "$filePath/$name");
    
         $queryInsertFiles = sprintf(
@@ -148,7 +148,7 @@ if($fileName[0] != ""){
                 (file_people_id, filename)
             VALUES
                 ('%s', '%s')"
-            ,$lastId['lastId'] ,$fileName[$Fileindex]);
+            ,$lastId['lastId'] ,$fileName[$fileIndex]);
         
         que($db, $queryInsertFiles);
 

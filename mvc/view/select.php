@@ -4,6 +4,7 @@
  -->
 <?php
 include('../include/header.php');
+include('../process/process_select_one.php');
 ?>
 
 <body>
@@ -35,29 +36,24 @@ include('../include/header.php');
             </h1>
           </div>
         </div>
-        <?php
-        include('../process/process_select_one.php');
-        ?>
         <div class="col-lg-12">
           <h2>회원정보 보기</h2>
           <div class="col-lg-6">
             <form>
-              <div class="form-group"><input class="form-control" type="hidden" name="id" value="<?= $id ?>" /> </div>
-              <div class="form-group"><input class="form-control" name="firstname" value="<?= $firstName ?>" disabled> </div>
-              <div class="form-group"><input class="form-control" name="lastname" value="<?= $lastName ?>" disabled> </div>
-              <div class="form-group"><input class="form-control" name="Middlename" value="<?= $mid_Name ?>" disabled> </div>
-              <div class="form-group"><input class="form-control" name="Address" value="<?= $ads ?>" disabled> </div>
-              <div class="form-group"><input class="form-control" name="Contact" value="<?= $ctt ?>" disabled> </div>
-              <div class="form-group">
-                <textarea class="form-control" rows="3" name="comment" disabled><?= $cmt ?></textarea>
-              </div>
+              <div class="form-group"> <input class="form-control"  value="<?= $id ?>" type="hidden" /> </div>
+              <div class="form-group"> <input class="form-control" value="<?= $firstName ?>" disabled> </div>
+              <div class="form-group"> <input class="form-control" value="<?= $lastName ?>" disabled> </div>
+              <div class="form-group"> <input class="form-control" value="<?= $midName ?>" disabled> </div>
+              <div class="form-group"> <input class="form-control" value="<?= $ads ?>" disabled> </div>
+              <div class="form-group"> <input class="form-control" value="<?= $ctt ?>" disabled> </div>
+              <div class="form-group">  <textarea class="form-control" rows="3" disabled><?= $cmt ?></textarea> </div>
               <div class="form-group">
                 <label for="files" downloads>기존 파일 목록 : <br>
                   <?
-                  if(isset($filename)){
-                    for ($index = 0; $index < sizeof($filename); $index++) {
+                  if(isset($fileName)){
+                    for ($fileIndex = 0; $fileIndex < sizeof($fileName); $fileIndex++) {
                   ?>
-                      <a href="../uploads/<?= $filename[$index] ?>" download><?= $filename[$index] ?></a><br>
+                      <a href="../uploads/<?= $fileName[$fileIndex] ?>" download><?= $fileName[$fileIndex] ?></a><br>
                   <?
                   }
                   }else{
@@ -72,7 +68,7 @@ include('../include/header.php');
       </div>
     </div>
   </div>
-  <script src="../js/jquery.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
 </body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </html>

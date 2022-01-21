@@ -23,7 +23,7 @@
 
 
     // Paging 처리시 사용하는 sql함수
-    function que_Paging($sql){
+    function db_open2($sql){
 		$db_id="root"; 
 		$db_pw="dkssud22@@"; 
 		$db_name="peopledb"; 

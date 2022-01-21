@@ -45,24 +45,24 @@ include('../process/process_select_one.php');
             <form id="form1" method="post" class="table_write">
               <input type="hidden" value="edit" name="action" class="validation-form">
               <div class="form-group"><input class="form-control" name="id" value="<?= $id ?>" type="hidden" /></div>
-              <div class="form-group"><input class="form-control" name="firstname" value="<?= $firstName ?>" id="firstname"></div>
-              <div class="form-group"><input class="form-control" name="lastname" value="<?= $lastName ?>" id="lastname"></div>
-              <div class="form-group"><input class="form-control" name="Middlename" value="<?= $mid_Name ?>" id="Middlename"></div>
-              <div class="form-group"><input class="form-control" name="Address" value="<?= $ads ?>" id="Address"></div>
-              <div class="form-group"><input class="form-control" name="Contact" value="<?= $ctt ?>" id="Contact"></div>
+              <div class="form-group"><input class="form-control" name="firstName" value="<?= $firstName ?>" id="firstName"></div>
+              <div class="form-group"><input class="form-control" name="lastName" value="<?= $lastName ?>" id="lastName"></div>
+              <div class="form-group"><input class="form-control" name="midName" value="<?= $midName ?>" id="midName"></div>
+              <div class="form-group"><input class="form-control" name="ads" value="<?= $ads ?>" id="ads"></div>
+              <div class="form-group"><input class="form-control" name="ctt" value="<?= $ctt ?>" id="ctt"></div>
               <div class="form-group">
-                <textarea class="form-control" rows="3" name="comment" id="comment"><?= $cmt ?></textarea>
+                <textarea class="form-control" rows="3" name="cmt" id="cmt"><?= $cmt ?></textarea>
               </div>
               <div class="form-group">
                 <label downloads>기존 파일 목록 : <br>
                   <?
-                  if (isset($filename)) {
-                    for ($index = 0; $index < sizeof($filename); $index++) {
+                  if (isset($fileName)) {
+                    for ($fileIndex = 0; $fileIndex < sizeof($fileName); $fileIndex++) {
                   ?>
-                      <div id="btnDivId<?= $index ?>">
-                        <a href="../uploads/<?= $filename[$index] ?>" download><?= $filename[$index] ?></a>
-                        <a href="../process/process_del_filelist.php?&id=<?=$id?>?&file_id=<?=$file_id[$index]?>">
-                          <input type="button" id="button<?= $index ?>" value="X" style="color:red;"></input>
+                      <div id="btnDivId<?= $fileIndex ?>">
+                        <a href="../uploads/<?= $fileName[$fileIndex] ?>" download><?= $fileName[$fileIndex] ?></a>
+                        <a href="../process/process_del_filelist.php?&id=<?=$id?>?&file_id=<?=$fileId[$fileIndex]?>">
+                          <input type="button" id="button<?= $fileIndex ?>" value="X" style="color:red;"></input>
                         </a>
                         <br>
                       </div>
@@ -86,57 +86,51 @@ include('../process/process_select_one.php');
       </div>
     </div>
   </div>
-  <script src="../js/jquery.js"></script>
+</body>
+<script src="../js/jquery.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script>
-    /**
-    @return BtnEdit()
-    create by 엄태영 2021.12.23
-**/
     $("#editAjax").click(function() {
-      if ($("#firstname").val().length == 0) {
+      if ($("#firstName").val().length == 0) {
         alert("이름을 입력하세요.");
-        $("#firstname").focus();
+        $("#firstName").focus();
         return false;
       }
-      if ($("#lastname").val().length == 0) {
+      if ($("#lastName").val().length == 0) {
         alert("별명을 입력하세요.");
-        $("#lastname").focus();
+        $("#lastName").focus();
         return false;
       }
-      if ($("#Middlename").val().length == 0) {
+      if ($("#midName").val().length == 0) {
         alert("성을 입력하세요.");
-        $("#Middlename").focus();
+        $("#midName").focus();
         return false;
       }
-      if ($("#Address").val().length == 0) {
+      if ($("#ads").val().length == 0) {
         alert("주소를 입력하세요.");
-        $("#Address").focus();
+        $("#ads").focus();
         return false;
       }
-      if ($("#Contact").val().length == 0) {
+      if ($("#ctt").val().length == 0) {
         alert("연락처를 입력하세요.");
-        $("#Contact").focus();
+        $("#ctt").focus();
         return false;
       }
-      if ($("#comment").val().length == 0) {
+      if ($("#cmt").val().length == 0) {
         alert("소개를 입력하세요.");
-        $("#comment").focus();
+        $("#cmt").focus();
         return false;
       } else {
-
-        // AJAX
-        function BtnEdit() {
+        function btnEdit() {
           var form = $('#form1')[0];
           var data = new FormData(form);
           $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url: '../process/process_All.php', // form을 전송할 실제 파일경로
+            url: '../process/process_All.php',
             data: data,
             processData: false,
             contentType: false,
-            cache: false,
             timeout: 600000,
             success: function(data) {
               console.log(data);
@@ -148,12 +142,8 @@ include('../process/process_select_one.php');
             }
           });
         }
-
-        return BtnEdit();
+        return btnEdit();
       }
     });
-    
   </script>
-</body>
-
 </html>
